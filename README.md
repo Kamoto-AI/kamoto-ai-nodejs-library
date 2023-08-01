@@ -110,4 +110,3 @@ Kamoto.AI is on a mission to redefine the landscape of AI, celebrity culture, an
 - [Kamoto.AI Support](https://help.kamoto.ai/)
 - [Issues](https://github.com/Kamoto-AI/kamoto-ai-nodejs-library/issues)
 - [MIT License](LICENSE.md)
-```

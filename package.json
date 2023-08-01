@@ -1,0 +1,35 @@
+{
+  "name": "kamotoai",
+  "version": "1.0.0",
+  "description": "Node.js library of Kamoto.AI APIs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kamoto-AI/kamoto-ai-nodejs-library.git"
+  },
+  "keywords": [
+    "Kamoto.AI",
+    "AI",
+    "Character",
+    "AI",
+    "Personality",
+    "Chat",
+    "with",
+    "AI",
+    "SaaS",
+    "Platform",
+    "Ai-Clone-as-a-Service"
+  ],
+  "author": "Kamoto.AI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kamoto-AI/kamoto-ai-nodejs-library/issues"
+  },
+  "homepage": "https://github.com/Kamoto-AI/kamoto-ai-nodejs-library#readme",
+  "dependencies": {
+    "axios": "^1.4.0"
+  }
+}

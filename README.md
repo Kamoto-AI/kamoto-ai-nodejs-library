@@ -1,6 +1,6 @@
 # KamotoAI Node.js Library
 
-The KamotoAI Node.js Library provides easy access to the Kamoto.AI API from applications written in server-side JavaScript.
+The KamotoAI Node.js Library provides easy access to the Kamoto.AI API for talking to AI Characters from [AI Marketplace](https://app.kamoto.ai/marketplace) from applications written in server-side JavaScript.
 
 ## Installation
 
@@ -12,7 +12,7 @@ npm install kamotoai
 
 ## Usage
 
-The package needs to be configured with your account's API Key and the Personality ID which you get from the Kamoto.AI platform. 
+The package needs to be configured with your account's API Key and the Personality ID which you get from the Kamoto.AI dashboard. Please visit [Kamoto.AI Dashboard](https://app.kamoto.ai/dashboard) to get your API key & Personality/Character ID. 
 
 ```javascript
 const KamotoClient = require('kamotoai');
@@ -20,20 +20,20 @@ const KamotoClient = require('kamotoai');
 const apiKey = 'your-api-key';
 const personalityId = 'your-personality-id';
 
-const client = new KamotoClient(apiKey, personalityId);
+const KamotoAI = new KamotoClient(apiKey, personalityId);
 ```
 
 ## Chat with the AI
 
-You can start chatting with your AI personality using the `chat` method.
+You can start chatting with your AI Character or Personality using the `chat` method. This will require the natural language input only eg. "Who are you?". No JSON structure or format needed. Just type your message in the chat function argument.
 
 ```javascript
-client.chat("Hello AI!").then(response => console.log(response.choices[0].message.content));
+KamotoAI.chat("Hello! Who are you?").then(response => console.log(response.choices[0].message.content));
 ```
 
 ## Chat with the AI with history
 
-You can maintain a conversation history with the AI using the `chatWithHistory` method. 
+You can maintain a conversation history with the AI character using the `chatWithHistory` method. This require the JSON array in the below format. Remeber only two roles are allowed, "user" & "character"
 
 ```javascript
 const messages = [
@@ -42,8 +42,8 @@ const messages = [
     content: 'Hi',
   },
   {
-    role: 'assistant',
-    content: 'Hello!',
+    role: 'character',
+    content: 'Hello! What brings you here?',
   },
   {
     role: 'user',
@@ -52,6 +52,32 @@ const messages = [
 ];
 
 client.chatWithHistory(messages).then(response => console.log(response.choices[0].message.content));
+```
+
+Below would be the response of the AI Character
+
+```javascript
+{
+    "model": "kai1-chat1-4k",
+    "timestamp": 1690887330,
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "character",
+                "content": "Greetings! I am Chanakya, an ancient Indian scholar and philosopher. I am known for my visionary political strategies and my treatise, Arthashastra.",
+                "emoji": "📚",
+                "emotion_in_word": "Wise",
+                "emotion_in_emoji": "🧠"
+            }
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 624,
+        "completion_tokens": 47,
+        "total_tokens": 671
+    }
+}
 ```
 
 ## Error handling
@@ -85,5 +111,3 @@ Kamoto.AI is on a mission to redefine the landscape of AI, celebrity culture, an
 - [Issues](https://github.com/Kamoto-AI/kamoto-ai-nodejs-library/issues)
 - [MIT License](LICENSE.md)
 ```
-
-Please make sure to replace 'your-api-key' and 'your-personality-id' with your actual API Key and Personality ID. Note that this README includes a section on how to handle errors in the event of a request failure, which can help users of your library to troubleshoot issues.

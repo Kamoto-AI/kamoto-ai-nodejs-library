@@ -23,7 +23,7 @@ const personalityId = 'your-personality-id';
 const KamotoAI = new KamotoClient(apiKey, personalityId);
 ```
 
-## Chat with the AI
+## Chat with the AI Character
 
 You can start chatting with your AI Character or Personality using the `chat` method. This will require the natural language input only eg. "Who are you?". No JSON structure or format needed. Just type your message in the chat function argument.
 
@@ -31,7 +31,7 @@ You can start chatting with your AI Character or Personality using the `chat` me
 KamotoAI.chat("Hello! Who are you?").then(response => console.log(response.choices[0].message.content));
 ```
 
-## Chat with the AI with history
+## Chat with the AI Character with history
 
 You can maintain a conversation history with the AI character using the `chatWithHistory` method. This require the JSON array in the below format. Remeber only two roles are allowed, "user" & "character"
 
@@ -75,6 +75,55 @@ Below would be the response of the AI Character
     "usage": {
         "prompt_tokens": 624,
         "completion_tokens": 47,
+        "total_tokens": 671
+    }
+}
+```
+
+## Making AI Character reply while considering you Data
+
+Optionally, you can include a data role just before the most recent user message. This data will be taken into account in the Character's reply from Kamoto.AI. Please note that the data role should always be followed by the user role; otherwise, it will be discarded. Furthermore, this data will not influence any subsequent replies. If you wish to have another user message considered along with this data, you'll need to resend the data again.
+
+```javascript
+const messages = [
+  {
+    role: 'user',
+    content: 'Hi',
+  },
+  {
+    role: 'data',
+    content: 'Name of my pet is Oliver and it is labrador breed',
+  },
+  {
+    role: 'user',
+    content: 'What pet I have?',
+  },
+];
+
+client.chatWithHistory(messages).then(response => console.log(response.choices[0].message.content));
+```
+
+Below would be the response of the AI Character
+
+```javascript
+{
+    "model": "kai1-chat1-4k",
+    "timestamp": 1690887330,
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "character",
+                "content": "You have a wonderful dog name Oliver. I hope you are enjoying your time with Oliver",
+                "emoji": "🐶",
+                "emotion_in_word": "Happy",
+                "emotion_in_emoji": "😄"
+            }
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 624,
+        "completion_tokens": 30,
         "total_tokens": 671
     }
 }
